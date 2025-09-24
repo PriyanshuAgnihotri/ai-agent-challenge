@@ -2,6 +2,8 @@ import argparse
 import subprocess
 import sys
 from pathlib import Path
+import pdfplumber
+import pandas as pd
 
 def run_tests(target: str) -> bool:
     """Run pytest for the target bank parser."""
@@ -13,24 +15,34 @@ def run_tests(target: str) -> bool:
     return result.returncode == 0
 
 def generate_parser(target: str):
-    """Generate a parser file for the given bank."""
+    """Generate a parser file for the given bank with dynamic header detection."""
     parser_path = Path(f"custom_parsers/{target}_parser.py")
 
-    code = '''import pdfplumber
+    code = f'''import pdfplumber
 import pandas as pd
 
 def parse(pdf_path: str) -> pd.DataFrame:
     rows = []
+    columns = None
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
             table = page.extract_table()
             if table:
+                # Detect header dynamically
+                if columns is None:
+                    columns = table[0]
                 # Skip header row
                 for row in table[1:]:
                     rows.append(row)
 
     # Normalize rows into DataFrame
-    df = pd.DataFrame(rows, columns=["Date", "Description", "Debit Amt", "Credit Amt", "Balance"])
+    df = pd.DataFrame(rows, columns=columns)
+
+    # Convert numeric columns if they exist
+    for col in df.columns:
+        if any(keyword in col.lower() for keyword in ["debit", "credit", "balance"]):
+            df[col] = pd.to_numeric(df[col].replace('', 0.0), errors='coerce').fillna(0.0)
+
     return df
 '''
     parser_path.write_text(code)
@@ -40,7 +52,7 @@ if __name__ == "__main__":
     parser.add_argument("--target", required=True)
     args = parser.parse_args()
 
-    # self-correct loop
+    # Self-correct loop
     for attempt in range(3):
         generate_parser(args.target)
         if run_tests(args.target):
