@@ -19,15 +19,20 @@ project-structure: |
   ├── agent.py                   # Main AI agent loop
   
   ├── run_icici.py               # Quick ICICI run
+  
   ├── custom_parsers/            # Generated parsers
-  │   └── icici_parser.py
+      │   └── icici_parser.py
+  
   ├── data/
-  │   └── icici/
-  │       ├── icici_sample.pdf
-  │       └── result.csv
+      │   └── icici/
+      │       ├── icici_sample.pdf
+      │       └── result.csv
+      
   ├── tests/
-  │   └── test_icici_parser.py
+      │   └── test_icici_parser.py
+      
   ├── requirements.txt           # Python dependencies
+  
   └── README.md
 
 installation: |
