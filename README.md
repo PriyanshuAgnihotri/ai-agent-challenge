@@ -18,8 +18,6 @@ project-structure: |
   ai-agent-challenge/
   ├── agent.py                   # Main AI agent loop
   
-  ├── run_icici.py               # Quick ICICI run
-  
   ├── custom_parsers/            # Generated parsers
       │   └── icici_parser.py
   
@@ -46,4 +44,3 @@ installation: |
   python -m venv venv
   source venv/bin/activate  # Linux/Mac
   venv\Scripts\activate     # Windows
-  pip install -r requirements.txt
