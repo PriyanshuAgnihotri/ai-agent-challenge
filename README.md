@@ -21,8 +21,8 @@ project-structure: |
   ├── run_icici.py               # Quick ICICI run
   
   ├── custom_parsers/            # Generated parsers
-      │  
-      └── icici_parser.py
+  
+      │   └── icici_parser.py
   
   ├── data/
       │   └── icici/
