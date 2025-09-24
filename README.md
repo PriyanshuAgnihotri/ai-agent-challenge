@@ -17,6 +17,7 @@ features:
 project-structure: |
   ai-agent-challenge/
   ├── agent.py                   # Main AI agent loop
+  
   ├── run_icici.py               # Quick ICICI run
   ├── custom_parsers/            # Generated parsers
   │   └── icici_parser.py
