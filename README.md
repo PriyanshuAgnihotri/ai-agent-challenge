@@ -35,6 +35,10 @@ project-structure: |
   
   └── README.md
 
+
+  <img width="1024" height="1536" alt="54aa0902-e1d3-4f51-bb2a-8b9fca49943e" src="https://github.com/user-attachments/assets/89453573-141c-424a-b541-a6a3f7e4c08b" />
+
+
 installation: |
   ```bash
   git clone https://github.com/<your-username>/ai-agent-challenge.git
